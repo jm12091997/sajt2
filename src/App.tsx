@@ -9,7 +9,7 @@ import Chatbot from './components/Chatbot';
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Header />
       <Hero />
       <Services />
