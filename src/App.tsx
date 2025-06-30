@@ -1,22 +1,35 @@
-import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import About from './components/About';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
+import React, { Suspense, lazy } from 'react';
+
+// Lazy load components for better performance
+const Header = lazy(() => import('./components/Header'));
+const Hero = lazy(() => import('./components/Hero'));
+const Services = lazy(() => import('./components/Services'));
+const About = lazy(() => import('./components/About'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const Chatbot = lazy(() => import('./components/Chatbot'));
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+  </div>
+);
 
 function App() {
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-      <Hero />
-      <Services />
-      <About />
-      <Contact />
-      <Footer />
-      <Chatbot />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Header />
+        <main>
+          <Hero />
+          <Services />
+          <About />
+          <Contact />
+        </main>
+        <Footer />
+        <Chatbot />
+      </Suspense>
     </div>
   );
 }
